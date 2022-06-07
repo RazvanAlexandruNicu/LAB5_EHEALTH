@@ -1,0 +1,119 @@
+==== README =====
+
+Crearea de resurse HL7 FHIR
+
+cale: http://127.0.0.1:5000/fhir
+metoda: POST
+Body:
+{
+    "fhir_record": {
+        "resourceType": "Patient",
+        "id": "p001",
+        "active": true,
+        "name": [
+            {"text": "Adam Smith"}
+        ],
+        "birthDate": "1985-06-12"
+    }
+}
+
+ESTE IMPORTANT ca ‘resourceType’ sa existe în cadrul structurii ‘fhir_record’. Pe baza acestui câmp sunt diferențiate tipurile de resurse.
+
+Răspuns;
+
+„Resource Patient successfully added” - in caz de succes
+„fhir_record field is required and it should contain 'resourceType' field” - in caz de eroare
+
+
+Listare de resurse HL7 FHIR
+
+cale: http://127.0.0.1:5000/fhir/all
+metoda: GET
+
+Va returna toate resursele existente
+
+Exemplu:
+
+{
+    "records": [
+        {
+            "active": true,
+            "birthDate": "1985-06-12",
+            "id": 1,
+            "name": [
+                {
+                    "text": "Adam Smith"
+                }
+            ],
+            "resourceType": "Patient"
+        },
+        {
+            "active": true,
+            "birthDate": "1985-06-12",
+            "id": 2,
+            "name": [
+                {
+                    "text": "Razvan Nicu"
+                }
+            ],
+            "resourceType": "Patient"
+        }
+    ]
+}
+
+Listare de resurse HL7 FHIR - pe tip de resursa
+
+cale: http://127.0.0.1:5000/fhir/all/<resourceType>
+metoda: GET
+
+Va returna toate resursele de tipul <resourceType> existente
+
+Exemplu:
+
+GET /fhir/all/Doctor
+
+{
+    "records": [
+        {
+            "active": true,
+            "birthDate": "1985-06-12",
+            "id": 3,
+            "name": [
+                {
+                    "text": "Razvan Nicu"
+                }
+            ],
+            "resourceType": "Doctor"
+        }
+    ]
+}
+
+
+GET by id
+
+cale: http://127.0.0.1:5000/fhir/<id>
+metoda: GET
+
+DELETE by id
+
+cale: http://127.0.0.1:5000/fhir/<id>
+metoda: DELETE
+
+UPDATEul unei resurse
+
+cale: http://127.0.0.1:5000/fhir/<id>
+metoda: PUT
+Body:
+{
+    "fhir_record": {
+        "resourceType": "Patient",
+        "id": "p001",
+        "active": true,
+        "name": [
+            {"text": "Adam Smith"}
+        ],
+        "birthDate": "1985-06-12"
+    }
+}
+
+
